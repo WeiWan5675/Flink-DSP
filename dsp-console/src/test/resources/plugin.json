@@ -1,0 +1,130 @@
+[
+  {
+    "pluginName": "ExampleInputPlugin",
+    "pluginType": "INPUT",
+    "pluginClass": "com.weiwan.dsp.plugins.input.ExampleInputPlugin",
+    "pluginDescription": "一个简单的样例输入插件",
+    "pluginConfigs": {
+      "mockSize": {
+        "key": "mockSize",
+        "value": 2,
+        "type": "Long",
+        "defaultValue": 1000,
+        "description": "Mock数据的条数",
+        "required": true
+      },
+      "mockInterval": {
+        "key": "mockInterval",
+        "value": 1000,
+        "type": "Long",
+        "defaultValue": 1000,
+        "description": "Mock数据的间隔",
+        "required": false
+      },
+      "fields": {
+        "key": "fields",
+        "type": "Array[Object]",
+        "valueFormat": "",
+        "defaultValue": "",
+        "objectDef": {
+          "fieldName": "String",
+          "fieldType": "String"
+        },
+        "objects": [
+          {
+            "fieldName": "fieldA",
+            "fieldType": "String"
+          },
+          {
+            "fieldName": "fieldB",
+            "fieldType": "Integer"
+          }
+        ],
+        "description": "字段列表",
+        "optionals": "",
+        "required": "true"
+      }
+    },
+    "pluginInfos": {
+      "icon": "conf/a.jpg",
+      "title": "dsp-example-plugin"
+    }
+  },
+  {
+    "pluginName": "ExampleProcessPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.process.ExampleProcessPlugin",
+    "pluginType": "PROCESS",
+    "pluginConfigs": {
+      "var1": {
+        "key": "var1",
+        "defaultValue": "defaultValue1",
+        "description": "测试参数1",
+        "required": "true"
+      },
+      "var2": {
+        "key": "var2",
+        "defaultValue": "defaultValue2",
+        "description": "测试参数2",
+        "required": "false"
+      }
+    }
+  },
+  {
+    "pluginName": "CopyStreamSpliterPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.CopyStreamSpliterPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+    }
+  },
+  {
+    "pluginName": "FieldMatchSpliterPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.FieldMatchSpliterPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+    }
+  },
+  {
+    "pluginName": "JavaScriptSpliterPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.JavaScriptSpliterPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+    }
+  },
+  {
+    "pluginName": "RegExpSpliterPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.RegExpSpliterPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+    }
+  },
+  {
+    "pluginName": "ExampleOutputPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.output.ExampleOutputPlugin",
+    "pluginType": "OUTPUT",
+    "pluginDescription": "",
+    "pluginConfigs": {
+      "var1": {
+        "key": "var1",
+        "type": "boolean",
+        "valueFormat": "",
+        "defaultValue": "false",
+        "description": "测试boolean参数",
+        "required": "true",
+        "optionals": "true,false"
+      },
+      "var2": {
+        "key": "var1",
+        "type": "String",
+        "valueFormat": "yyyyMMdd HH:mm:ss",
+        "defaultValue": "false",
+        "description": "测试boolean参数",
+        "required": "true",
+        "optionals": "true,false"
+      }
+    },
+    "pluginInfos": {
+      "icon": "conf/icon/Icon.svg",
+      "title": "ExampleOutputPlugin"
+    }
+  }
+]

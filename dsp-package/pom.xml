@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Flink-DSP</artifactId>
+        <groupId>com.weiwan.dsp</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>Flink-Dsp : Package</name>
+    <artifactId>dsp-package</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+<dependencies>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-common</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-core</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-api</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-plugin-example</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-plugin-commons</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-extends-plugins</artifactId>
+        <version>${dsp.version}</version>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-flink-metrics</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-task-schedule</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-client</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-runtime</artifactId>
+    </dependency>
+    <dependency>
+        <groupId>com.weiwan.dsp</groupId>
+        <artifactId>dsp-console</artifactId>
+    </dependency>
+</dependencies>
+    <build>
+        <finalName>${package.name}</finalName>
+        <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>3.1.1</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <descriptors>
+                        <descriptor>src/main/resources/assembly.xml</descriptor>
+                    </descriptors>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}/../dist</directory>
+                            <includes>
+                                <include>**</include>
+                            </includes>
+                            <followSymlinks>false</followSymlinks>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>mvn-copy-file</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <tasks>
+                        <delete dir="${basedir}/../target"/>
+                        <copy todir="${basedir}/../target/">
+                            <fileset dir="${basedir}/target/" includes="*.tar.gz"/>
+                        </copy>
+                        <untar src="${basedir}/../target/${package.name}.tar.gz" compression="gzip" dest="${basedir}/../target/"/>
+                    </tasks>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

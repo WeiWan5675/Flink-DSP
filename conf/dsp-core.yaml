@@ -1,0 +1,35 @@
+dsp:
+  flow:
+    nodes:
+  core:
+    engineConfig:
+      engineType: flink
+      engineMode: flink_on_yarn_per
+      engineConfigs:
+        classloader.resolve-order: child-first
+    metricConfig:
+      reportClass: com.weiwan.dsp.core.engine.flink.metrics.DspMetricsReport
+      reportServer: 127.0.0.1
+      reportPort: '54321'
+      reportInterval: 100000
+    speedLimiter:
+      enableLimiter: true
+      readSpeed: 20000
+      processSpeed: 20000
+      writeSpeed: 20000
+      samplingInterval: 30
+    unresolvedCollector:
+      enableCollector: true
+      collectorHandler: com.weiwan.dsp.core.resolve.logging.LogUnresolvedDataCollector
+      maxSamplingRecord: 1000
+      samplingInterval: 30
+      handlerConfigs:
+        logLevel: debug
+  job:
+    jobDeployTimeout: 3600
+    jobName: MyTest
+    jobId: '123124192409125098120'
+  custom:
+  setting:
+    flinkHome: /tmp/a
+    hadoopHome: /tmp/b

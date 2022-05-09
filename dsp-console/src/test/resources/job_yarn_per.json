@@ -1,0 +1,178 @@
+{
+  "dsp": {
+    "flow": {
+      "nodes": {
+        "P1": {
+          "nodeId": "P1",
+          "nodeType": "PROCESS",
+          "nodeName": "数据处理1",
+          "nodeDependents": [
+            "R1"
+          ],
+          "speedLimit": null,
+          "unresolvedCollectorConfig": null,
+          "plugins": {
+            "ExampleProcess": {
+              "pluginName": "ExampleProcess",
+              "pluginType": "PROCESS",
+              "pluginClass": "com.weiwan.dsp.plugins.process.ExampleProcessPlugin",
+              "pluginDescription": null,
+              "pluginConfigs": {
+                "test2": "test2",
+                "test": "test"
+              },
+              "pluginInfos": null
+            }
+          }
+        },
+        "W1": {
+          "nodeId": "W1",
+          "nodeType": "WRITER",
+          "nodeName": "输出节点1",
+          "nodeDependents": [
+            "U1"
+          ],
+          "speedLimit": null,
+          "unresolvedCollectorConfig": null,
+          "plugins": {
+            "ExampleWrite": {
+              "pluginName": "ExampleWrite",
+              "pluginType": "OUTPUT",
+              "pluginClass": "com.weiwan.dsp.plugins.output.ExampleOutputPlugin",
+              "pluginDescription": null,
+              "pluginConfigs": {
+                "writerPath": "/tmp/"
+              },
+              "pluginInfos": null
+            }
+          }
+        },
+        "U1": {
+          "nodeId": "U1",
+          "nodeType": "UNION",
+          "nodeName": "合并节点1",
+          "nodeDependents": [
+            "S1.0"
+          ],
+          "speedLimit": null,
+          "unresolvedCollectorConfig": null,
+          "plugins": null
+        },
+        "S1": {
+          "nodeId": "S1",
+          "nodeType": "SPLIT",
+          "nodeName": "拆分节点1",
+          "nodeDependents": [
+            "P1"
+          ],
+          "speedLimit": null,
+          "unresolvedCollectorConfig": null,
+          "plugins": {
+            "CopyStream": {
+              "pluginName": "CopyStream",
+              "pluginType": "SPLIT",
+              "pluginClass": "com.weiwan.dsp.plugins.split.CopyStreamSpliterPlugin",
+              "pluginDescription": null,
+              "pluginConfigs": null,
+              "pluginInfos": null
+            }
+          }
+        },
+        "R1": {
+          "nodeId": "R1",
+          "nodeType": "READER",
+          "nodeName": "读取节点1",
+          "nodeDependents": [],
+          "speedLimit": {
+            "enableLimiter": false,
+            "readSpeed": 100,
+            "processSpeed": 999999,
+            "writeSpeed": 999999,
+            "samplingInterval": 10
+          },
+          "unresolvedCollectorConfig": null,
+          "plugins": {
+            "ExampleReader": {
+              "pluginName": "ExampleReader",
+              "pluginType": "INPUT",
+              "pluginClass": "com.weiwan.dsp.plugins.input.ExampleInputPlugin",
+              "pluginDescription": "一个简单的样例输入插件",
+              "pluginConfigs": {
+                "maxMockSize": 10000,
+                "mockInterval": 5000,
+                "fields": [
+                  {
+                    "fieldName": "fieldA",
+                    "fieldType": "String"
+                  },
+                  {
+                    "fieldName": "fieldB",
+                    "fieldType": "Integer"
+                  },
+                  {
+                    "fieldName": "fieldC",
+                    "fieldType": "byte[]"
+                  }
+                ]
+              },
+              "pluginInfos": {
+                "icon": "conf/a.jpg",
+                "title": "dsp-example-plugin"
+              }
+            }
+          }
+        }
+      }
+    },
+    "core": {
+      "engineConfig": {
+        "engineType": "FLINK",
+        "engineMode": "FLINK_ON_YARN_PER",
+        "engineConfigs": {
+          "parallelism.default": 1,
+          "classloader.resolve-order": "child-first",
+          "rest.flamegraph.enabled": true,
+          "execution.checkpointing.enable": true,
+          "execution.checkpointing.interval": 5000,
+          "execution.checkpointing.timeout": 300000,
+          "test.a.b.c": "testtt",
+          "metrics.reporter.slf4j.class": "org.apache.flink.metrics.slf4j.Slf4jReporter",
+          "metrics.reporter.slf4j.interval": "60"
+        }
+      },
+      "metricConfig": {},
+      "speedLimiter": {
+        "enableLimiter": true,
+        "readSpeed": 20000,
+        "processSpeed": 20000,
+        "writeSpeed": 20000,
+        "samplingInterval": 30
+      },
+      "unresolvedCollector": {
+        "collectorHandler": "com.weiwan.dsp.core.resolve.logging.LogUnresolvedDataCollector",
+        "maxSamplingRecord": 1000,
+        "samplingInterval": 30,
+        "enableCollector": true,
+        "handlerConfigs": {
+          "logLevel": "info"
+        }
+      }
+    },
+    "custom": {
+      "a": "a",
+      "b": "b",
+      "varC": [
+        "A",
+        "B"
+      ],
+      "varB": "a,b,c",
+      "varA": 1
+    },
+    "job": {
+      "jobName": "MyTest",
+      "jobId": "745103b51baf41acae4d419572d389d8",
+      "jobFile": "G:\\project\\Flink-DSP\\dsp-console\\src\\test\\resources\\job_yarn_per.json",
+      "jobDeployTimeout": 30000
+    }
+  }
+}

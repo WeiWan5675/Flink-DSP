@@ -1,0 +1,260 @@
+{
+  "dsp": {
+    "flow": {
+      "nodes": {
+        "07a05ae6-ffde-4d65-9971-0dfd8690c854": {
+          "nodeName": "07a05ae6-ffde-4d65-9971-0dfd8690c854",
+          "nodeType": "Reader",
+          "nodeId": "07a05ae6-ffde-4d65-9971-0dfd8690c854",
+          "plugins": [
+            {
+              "id": 265,
+              "pluginJarId": "ce1da1ad29445ce08ed20c9c79c2118d",
+              "pluginId": null,
+              "pluginName": "ExampleInputPlugin",
+              "pluginType": {
+                "type": "输入插件",
+                "code": 1
+              },
+              "pluginAlias": "",
+              "pluginClass": "com.weiwan.dsp.plugins.input.ExampleInputPlugin",
+              "flowPluginRefs": [],
+              "pluginDescription": "一个简单的样例输入插件",
+              "pluginConfigs": {
+                "mockSize": {
+                  "defaultValue": 1000,
+                  "description": "Mock数据的条数",
+                  "type": "java.lang.Long",
+                  "value": 2,
+                  "key": "mockSize",
+                  "required": true
+                },
+                "mockInterval": {
+                  "defaultValue": 1000,
+                  "description": "Mock数据的间隔",
+                  "type": "java.lang.Long",
+                  "value": 1000,
+                  "key": "mockInterval",
+                  "required": false
+                },
+                "fields": {
+                  "objectDef": {
+                    "fieldName": "String",
+                    "fieldType": "String"
+                  },
+                  "defaultValue": [],
+                  "objects": [
+                    {
+                      "fieldName": "fieldA",
+                      "fieldType": "String"
+                    },
+                    {
+                      "fieldName": "fieldB",
+                      "fieldType": "Integer"
+                    }
+                  ],
+                  "valueFormat": "",
+                  "description": "字段列表",
+                  "type": "java.util.List",
+                  "optionals": "",
+                  "key": "fields",
+                  "required": "true"
+                }
+              },
+              "pluginInfos": {
+                "icon": "conf/a.jpg",
+                "title": "dsp-example-plugin"
+              },
+              "createTime": 1648615628000,
+              "updateTime": 1648662030000
+            }
+          ],
+          "nodeInfo": {
+            "posX": 227,
+            "posY": 164
+          },
+          "nodeDependents": [],
+          "nodeOutputDependents": [
+            "f59c105c-2447-4ce9-853e-91c0da97b3de"
+          ],
+          "nodeDescription": "",
+          "speedLimit": {
+            "enableLimiter": false,
+            "readSpeed": 999999,
+            "processSpeed": 999999,
+            "writeSpeed": 999999,
+            "samplingInterval": 30000
+          }
+        },
+        "f59c105c-2447-4ce9-853e-91c0da97b3de": {
+          "nodeName": "f59c105c-2447-4ce9-853e-91c0da97b3de",
+          "nodeType": "Process",
+          "nodeId": "f59c105c-2447-4ce9-853e-91c0da97b3de",
+          "plugins": [
+            {
+              "id": 266,
+              "pluginJarId": "ce1da1ad29445ce08ed20c9c79c2118d",
+              "pluginId": null,
+              "pluginName": "ExampleProcessPlugin",
+              "pluginType": {
+                "type": "处理插件",
+                "code": 3
+              },
+              "pluginAlias": "",
+              "pluginClass": "com.weiwan.dsp.plugins.process.ExampleProcessPlugin",
+              "flowPluginRefs": [],
+              "pluginDescription": "",
+              "pluginConfigs": {
+                "var2": {
+                  "defaultValue": "defaultValue2",
+                  "description": "测试参数2",
+                  "key": "var2",
+                  "required": "false"
+                },
+                "var1": {
+                  "defaultValue": "defaultValue1",
+                  "description": "测试参数1",
+                  "key": "var1",
+                  "required": "true"
+                }
+              },
+              "pluginInfos": null,
+              "createTime": 1648615628000,
+              "updateTime": 1648662030000
+            }
+          ],
+          "nodeInfo": {
+            "posX": 735,
+            "posY": 152
+          },
+          "nodeDependents": [
+            "07a05ae6-ffde-4d65-9971-0dfd8690c854"
+          ],
+          "nodeOutputDependents": [
+            "ddae3943-9383-4cc0-9776-97c93f0b0060"
+          ],
+          "nodeDescription": "",
+          "speedLimit": {
+            "enableLimiter": false,
+            "readSpeed": 999999,
+            "processSpeed": 999999,
+            "writeSpeed": 999999,
+            "samplingInterval": 30000
+          }
+        },
+        "ddae3943-9383-4cc0-9776-97c93f0b0060": {
+          "nodeName": "ddae3943-9383-4cc0-9776-97c93f0b0060",
+          "nodeType": "Writer",
+          "nodeId": "ddae3943-9383-4cc0-9776-97c93f0b0060",
+          "plugins": [
+            {
+              "id": 271,
+              "pluginJarId": "ce1da1ad29445ce08ed20c9c79c2118d",
+              "pluginId": null,
+              "pluginName": "ExampleOutputPlugin",
+              "pluginType": {
+                "type": "输出插件",
+                "code": 2
+              },
+              "pluginAlias": "",
+              "pluginClass": "com.weiwan.dsp.plugins.output.ExampleOutputPlugin",
+              "flowPluginRefs": [],
+              "pluginDescription": "",
+              "pluginConfigs": {
+                "var2": {
+                  "defaultValue": "false",
+                  "valueFormat": "yyyyMMdd HH:mm:ss",
+                  "description": "测试boolean参数",
+                  "type": "java.lang.Boolean",
+                  "optionals": "true,false",
+                  "key": "var1",
+                  "required": "true"
+                },
+                "var1": {
+                  "defaultValue": "false",
+                  "valueFormat": "",
+                  "description": "测试boolean参数",
+                  "type": "java.lang.Boolean",
+                  "optionals": "true,false",
+                  "key": "var1",
+                  "required": "true"
+                }
+              },
+              "pluginInfos": {
+                "icon": "conf/icon/Icon.svg",
+                "title": "ExampleOutputPlugin"
+              },
+              "createTime": 1648615628000,
+              "updateTime": 1648662030000
+            }
+          ],
+          "nodeInfo": {
+            "posX": 1165,
+            "posY": 299
+          },
+          "nodeDependents": [
+            "f59c105c-2447-4ce9-853e-91c0da97b3de"
+          ],
+          "nodeOutputDependents": [],
+          "nodeDescription": "",
+          "speedLimit": {
+            "enableLimiter": false,
+            "readSpeed": 999999,
+            "processSpeed": 999999,
+            "writeSpeed": 999999,
+            "samplingInterval": 30000
+          }
+        }
+      }
+    },
+    "core": {
+      "engineConfig": {
+        "engineType": "FLINK",
+        "engineMode": "FLINK_STANDALONE",
+        "engineConfigs": {
+          "parallelism.default": 1,
+          "classloader.resolve-order": "child-first",
+          "rest.flamegraph.enabled": true,
+          "execution.checkpointing.enable": true,
+          "execution.checkpointing.interval": 1000,
+          "test.a.b.c": "testtt",
+          "metrics.reporter.slf4j.class": "org.apache.flink.metrics.slf4j.Slf4jReporter",
+          "metrics.reporter.slf4j.interval": "60"
+        }
+      },
+      "metricConfig": {},
+      "speedLimiter": {
+        "enableLimiter": true,
+        "readSpeed": 20000,
+        "processSpeed": 20000,
+        "writeSpeed": 20000,
+        "samplingInterval": 30
+      },
+      "unresolvedCollector": {
+        "collectorHandler": "com.weiwan.dsp.core.resolve.http.HttpUnresolvedDataCollector",
+        "maxSamplingRecord": 1000,
+        "samplingInterval": 30,
+        "enableCollector": true,
+        "handlerConfigs": {
+          "logLevel": "info"
+        }
+      }
+    },
+    "custom": {
+      "a": "a",
+      "b": "b",
+      "varC": [
+        "A",
+        "B"
+      ],
+      "varB": "a,b,c",
+      "varA": 1
+    },
+    "job": {
+      "jobName": "MyTest",
+      "jobId": "745103b51baf41acae4d419572d389d7",
+      "jobFile": "G:\\project\\Flink-DSP\\tmp\\jobs\\job_745103b51baf41acae4d419572d389d7.json",
+      "jobDeployTimeout": 30000
+    }
+  }
+}

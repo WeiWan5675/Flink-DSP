@@ -1,0 +1,9 @@
+dsp:
+  name: ${dsp.name}
+  version: ${project.version}
+  build:
+    version: ${build.version}
+    flinkVersion: ${flink.version}
+    hadoopVersion: ${hadoop.version}
+    jdkVersion: ${java.version}
+    mavenVersion: ${maven.version}

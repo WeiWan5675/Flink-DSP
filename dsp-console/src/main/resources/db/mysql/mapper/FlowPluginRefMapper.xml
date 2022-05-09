@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiwan.dsp.console.mapper.FlowPluginRefMapper">
+
+    <resultMap id="classRefMap" type="com.weiwan.dsp.console.model.entity.FlowPluginRef">
+        <result column="plugin_class" property="pluginClass"/>
+        <result column="flow_id" property="flowId"/>
+    </resultMap>
+
+    <insert id="insertBatch" parameterType="com.weiwan.dsp.console.model.entity.FlowPluginRef" useGeneratedKeys="true">
+        INSERT INTO dsp_flow_plugin
+        (
+        flow_pk,
+        flow_id,
+        flow_name,
+        plugin_jar_pk,
+        plugin_jar_id,
+        plugin_jar_name,
+        plugin_pk,
+        plugin_id,
+        plugin_name,
+        plugin_class,
+        create_time
+        )
+        VALUES
+        <foreach collection="flowPluginRefs" item="flowPluginRef" separator=",">
+            (
+            #{flowPluginRef.flowPk},
+            #{flowPluginRef.flowId},
+            #{flowPluginRef.flowName},
+            #{flowPluginRef.pluginJarPk},
+            #{flowPluginRef.pluginJarId},
+            #{flowPluginRef.pluginJarName},
+            #{flowPluginRef.pluginPk},
+            #{flowPluginRef.pluginId},
+            #{flowPluginRef.pluginName},
+            #{flowPluginRef.pluginClass},
+            #{flowPluginRef.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectFlowPksByJarId" resultType="java.lang.Integer">
+        select distinct flow_pk
+        from dsp_flow_plugin
+        where plugin_jar_id = #{pluginJarId}
+    </select>
+
+    <select id="selectPluginClassMapByJarId" parameterType="string" resultMap="classRefMap">
+        select flow_id, plugin_class
+        from dsp_flow_plugin
+        where plugin_jar_id = #{pluginJarId}
+    </select>
+</mapper>

@@ -1,0 +1,78 @@
+dsp:
+  flow:
+    nodes:
+      R1:
+        nodeId: R1
+        nodeName: 读取节点1
+        nodeType: reader
+        nodeDependents: []
+        pluginName: dsp-mysql-plugin-reader
+        plugins:
+          dsp-mysql-plugin-reader:
+            pluginName: dsp-mysql-plugin-reader
+            pluginType: Reader
+      S1:
+        nodeId: S1
+        nodeName: 拆分节点1
+        nodeType: split
+        nodeDependents:
+          - P1
+        plugins:
+          dsp-common-stream-split:
+            pluginName: dsp-common-stream-split
+            pluginType: System
+            splitNum: 3
+            splitOuts:
+              - filterMode: js
+                filterExpr: ''
+              - filterMode: match
+                filterExpr: a=123
+              - filterMode: regexp
+                filterExpr: a=^adada&
+      P1:
+        nodeId: P1
+        nodeName: 数据处理1
+        nodeType: Process
+        nodeDependents:
+          - R1
+        plugins:
+          dsp-plugin-common-process1:
+            pluginName: dsp-plugin-common-process1
+            pluginType: process
+          dsp-plugin-common-process2:
+            pluginName: dsp-plugin-common-process2
+            pluginType: process
+      U1:
+        nodeId: U1
+        nodeName: 合并节点1
+        nodeType: union
+        nodeDependents:
+          - S1.0
+          - S1.1
+          - S1.2
+        plugins:
+          dsp-plugin-common-union:
+            pluginName: dsp-plugin-common-union
+            pluginType: System
+      W1:
+        nodeId: W1
+        nodeName: 输出节点1
+        nodeType: writer
+        nodeDependents:
+          - U1
+        pluginName: dsp-plugin-common-writer
+        plugins:
+          dsp-plugin-common-writer:
+            pluginName: dsp-plugin-common-writer
+            pluginType: Writer
+            writerPath: /tmp/
+  core:
+    engineConfig:
+      mode: standalone
+    metricsConfig:
+      reportServer: '127.0.0.1:8989'
+    systemConfig:
+      osName: linux
+  custom:
+    a: a
+    b: b

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.weiwan.dsp.console.mapper.FlowConfigRefMapper">
+    <update id="updateBatchByConfigPk">
+        update dsp_flow_config
+        set config_name = #{configName}
+        where config_pk = #{configPk}
+    </update>
+    <select id="checkReferenceExist" parameterType="integer" resultType="integer">
+        select
+        config_pk
+        from
+        dsp_flow_config
+        <where>
+            config_pk in
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <foreach collection="configPks" item="configPk" separator=",">
+                    #{configPk}
+                </foreach>
+            </trim>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,120 @@
+[
+  {
+    "R1": {
+      "nodeId": "R1",
+      "nodeType": {
+        "type": "",
+        "code": ""
+      },
+      "nodeName": "",
+      "speedLimit": "",
+      "unresolvedCollectorConfig": "",
+      "nodeDependents": [],
+      "nodeOutputDependents": [
+        "P6"
+      ],
+      "nodeInfo": {
+        "x": 39,
+        "y": 57.39999771118164
+      },
+      "plugins": {}
+    }
+  },
+  {
+    "S5": {
+      "nodeId": "S5",
+      "nodeType": {
+        "type": "",
+        "code": ""
+      },
+      "nodeName": "",
+      "speedLimit": "",
+      "unresolvedCollectorConfig": "",
+      "nodeDependents": [
+        "P4"
+      ],
+      "nodeOutputDependents": [
+        "P6",
+        "P7",
+        "P8"
+      ],
+      "nodeInfo": {
+        "x": 262,
+        "y": 245
+      },
+      "plugins": {
+        "ExampleInputPlugin": {},
+        "ExampleProcessPlugin": {},
+        "CopyStreamSpliterPlugin": {}
+      }
+    }
+  },
+  {
+    "P6": {
+      "nodeId": "P6",
+      "nodeType": {
+        "type": "",
+        "code": ""
+      },
+      "nodeName": "",
+      "speedLimit": "",
+      "unresolvedCollectorConfig": "",
+      "nodeDependents": [
+        "S5.0"
+      ],
+      "nodeOutputDependents": [
+        "U9.0"
+      ],
+      "nodeInfo": {
+        "x": 642,
+        "y": 173
+      },
+      "plugins": {}
+    }
+  },
+  {
+    "U9": {
+      "nodeId": "U9",
+      "nodeType": {
+        "type": "",
+        "code": ""
+      },
+      "nodeName": "",
+      "speedLimit": "",
+      "unresolvedCollectorConfig": "",
+      "nodeDependents": [
+        "P6",
+        "P7"
+      ],
+      "nodeOutputDependents": [
+        "W11"
+      ],
+      "nodeInfo": {
+        "x": 863,
+        "y": 252.4000005722046
+      },
+      "plugins": {}
+    }
+  },
+  {
+    "W11": {
+      "nodeId": "W11",
+      "nodeType": {
+        "type": "",
+        "code": ""
+      },
+      "nodeName": "",
+      "speedLimit": "",
+      "unresolvedCollectorConfig": "",
+      "nodeDependents": [
+        "U9"
+      ],
+      "nodeOutputDependents": [],
+      "nodeInfo": {
+        "x": 1096,
+        "y": 281.4000015258789
+      },
+      "plugins": {}
+    }
+  }
+]

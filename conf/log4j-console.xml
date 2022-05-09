@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="OFF">
+    <Properties>
+        <!-- 配置日志文件输出目录，此配置将日志输出到tomcat根目录下的指定文件夹 -->
+        <Property name="CONSOLE_LOG_DIR">${sys:dsp.console.logging.console.dir}</Property>
+        <Property name="JOB_LOG_DIR">${sys:dsp.console.logging.job.dir}</Property>
+        <Property name="BACKUP_LOG_DIR">${sys:dsp.console.logging.backup}</Property>
+    </Properties>
+    <Appenders>
+        <Routing name="JobRollingFile">
+            <Routes pattern="$${ctx:JobID}">
+                <Route>
+                    <RollingFile name="Rolling-${ctx:JobID}" fileName="${JOB_LOG_DIR}/job-${ctx:JobID}.log"
+                                 filePattern="${BACKUP_LOG_DIR}/${ctx:JobID}-%d{yyyy-MM-dd}-%i.log.gz">
+                        <PatternLayout>
+                            <pattern>%d{yyyy-MM-dd HH:mm:ss,SSS} %-5p %-60c %x - %m%n</pattern>
+                        </PatternLayout>
+                        <Policies>
+                            <TimeBasedTriggeringPolicy interval="3" modulate="true"/>
+                            <SizeBasedTriggeringPolicy size="10MB"/>
+                        </Policies>
+                    </RollingFile>
+                </Route>
+            </Routes>
+        </Routing>
+
+        <Console name="ConsolePrint" target="SYSTEM_OUT">
+            <PatternLayout pattern="%X{JobID}%clr{%d{yyyy-MM-dd HH:mm:ss.SSS}}{faint} [%clr{%5p} ] %clr{${sys:PID}}{magenta} %clr{---}{faint} %clr{[%15.15t ]}{faint} %clr{%-40.40c{1.}}{cyan} %clr{:}{faint} %m%n%xwEx"/>
+        </Console>
+        <RollingFile name="RollingFile" fileName="${CONSOLE_LOG_DIR}/dsp-console.log"
+                     filePattern="${BACKUP_LOG_DIR}/dsp-console-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout>
+                <pattern>[%X{JobID}][%d{yyyy-MM-dd HH:mm:ss:SSS}]-[%t]-[%p]-[%l]-%m%n</pattern>
+            </PatternLayout>
+            <Policies>
+                <TimeBasedTriggeringPolicy interval="3" modulate="true"/>
+                <SizeBasedTriggeringPolicy size="10MB"/>
+            </Policies>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <!-- 级别顺序（低到高）：TRACE < DEBUG < INFO < WARN < ERROR < FATAL -->
+        <Root level="INFO" includeLocation="true">
+            <!-- AppenderRef 中的 ref 值必须是在前面定义的 appender -->
+            <AppenderRef ref="JobRollingFile"/>
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="ConsolePrint"/>
+        </Root>
+    </Loggers>
+</Configuration>

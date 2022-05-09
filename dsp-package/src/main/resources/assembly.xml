@@ -1,0 +1,93 @@
+<assembly xmlns="http://maven.apache.org/ASSEMBLY/2.1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/ASSEMBLY/2.1.0 http://maven.apache.org/xsd/assembly-2.1.0.xsd">
+    <formats>
+        <format>tar.gz</format>
+    </formats>
+    <id>release</id>
+    <includeBaseDirectory>true</includeBaseDirectory>
+
+    <dependencySets>
+        <!-- lib -->
+        <dependencySet>
+            <unpack>false</unpack>
+            <useProjectArtifact>false</useProjectArtifact>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <scope>runtime</scope>
+            <excludes>
+                <!-- groupId:artifactId:type:classifier -->
+                <exclude>com.weiwan.dsp:dsp-plugin*:jar:</exclude>
+                <exclude>com.weiwan.dsp:dsp-extends-plugins*:jar:</exclude>
+            </excludes>
+            <outputDirectory>lib</outputDirectory>
+        </dependencySet>
+        <!-- conf -->
+        <dependencySet>
+            <unpack>true</unpack>
+            <includes>
+                <include>com.weiwan.dsp:*:jar</include>
+            </includes>
+            <unpackOptions>
+                <includes>
+                    <include>conf/example/*</include>
+                    <include>conf/dsp-console.yaml</include>
+                    <include>conf/dsp-console-db.yaml</include>
+                    <include>conf/dsp-core.yaml</include>
+                    <include>conf/log4j.properties</include>
+                    <include>conf/log4j-cli.properties</include>
+                    <include>conf/log4j-console.xml</include>
+                </includes>
+            </unpackOptions>
+            <useProjectArtifact>false</useProjectArtifact>
+            <outputDirectory>./</outputDirectory>
+        </dependencySet>
+        <!-- 插件 -->
+        <dependencySet>
+            <unpack>false</unpack>
+            <includes>
+                <include>com.weiwan.dsp:dsp-plugin*:jar:</include>
+            </includes>
+            <excludes>
+                <exclude>com.weiwan.dsp:dsp-extends-plugins*:jar:</exclude>
+            </excludes>
+            <outputDirectory>lib/system-plugin</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+
+        <fileSet>
+            <directory>${basedir}/../bin</directory>
+            <outputDirectory>bin</outputDirectory>
+            <fileMode>0777</fileMode>
+        </fileSet>
+        <fileSet>
+            <directory>${basedir}/../doc</directory>
+            <outputDirectory>doc</outputDirectory>
+        </fileSet>
+        <fileSet>
+                <outputDirectory>ext-lib</outputDirectory>
+                <excludes><exclude>**/*</exclude></excludes>
+        </fileSet>
+        <fileSet>
+            <outputDirectory>plugin</outputDirectory>
+            <excludes><exclude>**/*</exclude></excludes>
+        </fileSet>
+        <fileSet> <!-- 创建空的临时文件夹 -->
+            <outputDirectory>logs</outputDirectory>
+            <excludes><exclude>**/*</exclude></excludes>
+        </fileSet>
+        <fileSet> <!-- 创建空的日志文件夹 -->
+            <outputDirectory>tmp</outputDirectory>
+            <excludes><exclude>**/*</exclude></excludes>
+        </fileSet>
+    </fileSets>
+    <files>
+        <file>
+            <source>${basedir}/../README.md</source>
+            <outputDirectory>.</outputDirectory>
+        </file>
+        <file>
+            <source>${basedir}/../LICENSE</source>
+            <outputDirectory>.</outputDirectory>
+        </file>
+    </files>
+</assembly>

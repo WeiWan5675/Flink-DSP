@@ -1,0 +1,30 @@
+dsp:
+  console:
+    server:
+      port: 9876
+    report:
+      port: 9875
+
+    database:
+      create: false
+      upgrade: false
+
+    logging:
+      config: ${dsp.conf.dir}/log4j.xml
+      backup: ${dsp.log.dir}/backup
+      job:
+        dir: ${dsp.log.dir}/jobs
+      console:
+        dir: ${dsp.log.dir}
+
+schedule:
+  tasks:
+    - name: pluginUploadCleanTask
+      className: com.weiwan.dsp.console.schedule.tasks.PluginUploadCleanTask
+      cronExpr: 0 30 0 * * ?
+      taskConfigs:
+        { retentionTimeSeconds: 86400 }
+    - name: appStateScanTask
+      className: com.weiwan.dsp.console.schedule.tasks.AppStateScanTask
+      cronExpr: 0/30 * * * * ?
+      taskConfigs: { }

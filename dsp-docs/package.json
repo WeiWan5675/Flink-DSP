@@ -1,0 +1,25 @@
+{
+  "name": "Flink-DSP-Docs",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Flink-DSP",
+  "author": "xiaozhennan <xiaozhennan1995@gmail.com>",
+  "homepage": "https://github.com/WeiWan5675/Flink-DSP/README",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeiWan5675/Flink-DSP.git"
+  },
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs"
+  },
+  "bugs": {
+    "url": "https://github.com/WeiWan5675/Flink-DSP/issues"
+  },
+  "dependencies": {
+    "@vuepress/plugin-google-analytics": "^1.8.2",
+    "moment": "^2.29.1",
+    "vuepress": "^1.9.7",
+    "vuepress-plugin-auto-sidebar": "^2.4.0-alpha.1"
+  }
+}

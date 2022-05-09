@@ -1,0 +1,78 @@
+[
+  {
+    "pluginName": "FieldRenamePlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.commons.FieldRenamePlugin",
+    "pluginType": "PROCESS",
+    "pluginConfigs": {
+      "renameFields": {
+        "fullKey": "renameFields",
+        "key": "renameFields",
+        "value": null,
+        "defaultValue": [],
+        "optionals": null,
+        "required": true,
+        "description": "需修改的字段列表",
+        "type": "java.util.List",
+        "password": false,
+        "textarea": true
+      }
+    }
+  },
+  {
+    "pluginName": "CopyStreamSplitPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.CopyStreamSplitPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+    }
+  },
+  {
+    "pluginName": "JavaScriptSplitPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.JavaScriptSplitPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+      "javaScriptContent": {
+        "fullKey": "javaScriptContent",
+        "key": "javaScriptContent",
+        "value": null,
+        "defaultValue": null,
+        "optionals": null,
+        "required": true,
+        "description": "JavaScript脚本内容",
+        "type": "java.lang.String",
+        "password": false,
+        "textarea": false
+      }
+    }
+  },
+  {
+    "pluginName": "RegexSplitPlugin",
+    "pluginClass": "com.weiwan.dsp.plugins.split.RegexSplitPlugin",
+    "pluginType": "SPLIT",
+    "pluginConfigs": {
+      "regexMatchField": {
+        "fullKey": "regexMatchField",
+        "key": "regexMatchField",
+        "value": null,
+        "defaultValue": null,
+        "optionals": null,
+        "required": true,
+        "description": "正则表达式匹配字段",
+        "type": "java.lang.String",
+        "password": false,
+        "textarea": false
+      },
+      "regexContent": {
+        "fullKey": "regexContent",
+        "key": "regexContent",
+        "value": null,
+        "defaultValue": null,
+        "optionals": null,
+        "required": true,
+        "description": "正则表达式内容",
+        "type": "java.lang.String",
+        "password": false,
+        "textarea": false
+      }
+    }
+  }
+]

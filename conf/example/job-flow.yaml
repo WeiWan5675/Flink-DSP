@@ -1,0 +1,164 @@
+dsp:
+  flow:
+    nodes:
+      P1:
+        nodeId: P1
+        nodeType: PROCESS
+        nodeName: 数据处理1
+        nodeDependents:
+          - R1
+        speedLimit: null
+        plugins:
+          dsp-plugin-common-process1:
+            pluginType: process
+            pluginName: dsp-plugin-common-process1
+            pluginClass: com.weiwan.dsp.plugins.process.ExampleProcessPlugin
+          dsp-plugin-common-process2:
+            pluginType: process
+            pluginName: dsp-plugin-common-process2
+            pluginClass: com.weiwan.dsp.plugins.process.ExampleProcessPlugin
+      W1:
+        nodeId: W1
+        nodeType: WRITER
+        nodeName: 输出节点1
+        nodeDependents:
+          - U1
+        speedLimit: {}
+        plugins:
+          dsp-plugin-common-writer:
+            pluginType: OUTPUT
+            pluginName: dsp-plugin-common-writer
+            pluginClass: com.weiwan.dsp.plugins.output.ExampleOutputPlugin
+            writerPath: /tmp/
+      U1:
+        nodeId: U1
+        nodeType: UNION
+        nodeName: 合并节点1
+        nodeDependents:
+          - S1.0
+          - S1.2
+          - S2.0
+      P2:
+        nodeId: P2
+        nodeType: PROCESS
+        nodeName: 数据处理1
+        nodeDependents:
+          - S2.0
+        speedLimit: null
+        plugins:
+          dsp-plugin-common-process1:
+            pluginType: process
+            pluginName: dsp-plugin-common-process1
+            pluginClass: com.weiwan.dsp.plugins.process.ExampleProcessPlugin
+          dsp-plugin-common-process2:
+            pluginType: process
+            pluginName: dsp-plugin-common-process2
+            pluginClass: com.weiwan.dsp.plugins.process.ExampleProcessPlugin
+      W2:
+        nodeId: W2
+        nodeType: WRITER
+        nodeName: 输出节点1
+        nodeDependents:
+          - P2
+        speedLimit: {}
+        plugins:
+          dsp-plugin-common-writer:
+            pluginType: OUTPUT
+            pluginName: dsp-plugin-common-writer
+            pluginClass: com.weiwan.dsp.plugins.output.ExampleOutputPlugin
+            writerPath: /tmp/
+      S1:
+        nodeId: S1
+        nodeType: SPLIT
+        nodeName: 拆分节点1
+        nodeDependents:
+          - P1
+        plugins:
+          dsp-fieldMatch-stream-split:
+            pluginType: Process
+            pluginName: dsp-fieldMatch-stream-split
+            pluginClass: com.weiwan.dsp.plugins.split.FieldMatchSpliterPlugin
+          dsp-javaScript-stream-split:
+            pluginType: Process
+            pluginName: dsp-javaScript-stream-split
+            pluginClass: com.weiwan.dsp.plugins.split.JavaScriptSpliterPlugin
+          dsp-regExp-stream-split:
+            pluginType: Process
+            pluginName: dsp-regExp-stream-split
+            pluginClass: com.weiwan.dsp.plugins.split.RegExpSpliterPlugin
+      S2:
+        nodeId: S2
+        nodeType: SPLIT
+        nodeName: 拆分节点2
+        nodeDependents:
+          - S1.1
+        plugins:
+          dsp-fieldMatch-stream-split:
+            pluginType: Process
+            pluginName: dsp-fieldMatch-stream-split
+            pluginClass: com.weiwan.dsp.plugins.split.FieldMatchSpliterPlugin
+          dsp-javaScript-stream-split:
+            pluginType: Process
+            pluginName: dsp-javaScript-stream-split
+            pluginClass: com.weiwan.dsp.plugins.split.JavaScriptSpliterPlugin
+          dsp-regExp-stream-split:
+            pluginType: Process
+            pluginName: dsp-regExp-stream-split
+            pluginClass: com.weiwan.dsp.plugins.split.RegExpSpliterPlugin
+      R1:
+        nodeId: R1
+        nodeType: READER
+        nodeName: 读取节点1
+        nodeDependents: []
+        speedLimit:
+          enableLimiter: false
+          readSpeed: 100
+          writeSped: 0
+          samplingInterval: 10
+        plugins:
+          dsp-mysql-plugin-reader:
+            pluginType: INPUT
+            pluginName: dsp-mysql-plugin-reader
+            pluginClass: com.weiwan.dsp.plugins.input.ExampleInputPlugin
+            fields:
+              fieldA: String
+              fieldB: int
+            mockInterval: 5000
+  core:
+    engineConfig:
+      engineType: flink
+      engineMode: yarn-per-job
+      configs: {}
+    systemConfig:
+      speedLimiter:
+        enableLimiter: true
+        readSpeed: 10000
+        writeSped: 0
+        samplingInterval: 30
+      unresolvedCollector:
+        enableCollector: true
+        maxSamplingRecord: 1000
+        samplingInterval: 30
+        collectorHandler: com.weiwan.dsp.core.resolve.KafkaUnresolvedDataCollector
+        collectorConfig:
+          logLevel: debug
+          group.id: unresolved_report
+          bootstrap.servers: '127.0.0.1:9092'
+          topic: unresolved_data_topic
+      deployTimeout: 90
+    metricConfig:
+      reportClass: com.weiwan.dsp.core.engine.flink.metrics.DspMetricsReport
+      reportServer: 127.0.0.1
+      reportPort: '54321'
+      reportInterval: 100000
+  custom:
+    a: a
+    b: b
+    varC:
+      - A
+      - B
+    varB: 'a,b,c'
+    varA: 1
+  jobId: ''
+  jobName: ExampleJob
+  jobFile: 'D:\develop\github\Flink-DSP\conf\example\job-flow.json'

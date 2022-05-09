@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiwan.dsp.console.mapper.PluginJarMapper">
+
+    <resultMap id="pluginJarResultMap" type="com.weiwan.dsp.console.model.entity.PluginJar">
+        <result column="id" property="id"/>
+        <result column="plugin_jar_id" property="pluginJarId"/>
+        <result column="plugin_jar_name" property="pluginJarName"/>
+        <result column="plugin_jar_alias" property="pluginJarAlias"/>
+        <result column="plugin_jar_md5" property="pluginJarMd5"/>
+        <result column="plugin_jar_url" property="pluginJarUrl"/>
+        <result column="plugin_def_file" property="pluginDefFile"/>
+        <result column="plugin_def_file_content" property="pluginDefFileContent"/>
+        <result column="disable_mark" property="disableMark"/>
+        <result column="remark_msg" property="remarkMsg"/>
+        <result column="file_size" property="fileSize"/>
+        <result column="upload_time" property="uploadTime"/>
+        <result column="create_user" property="createUser"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <insert id="insertBatch" parameterType="com.weiwan.dsp.console.model.entity.PluginJar" useGeneratedKeys="true">
+        INSERT INTO dsp_plugin_jar
+        (
+        plugin_jar_id,
+        plugin_jar_name,
+        plugin_jar_alias,
+        plugin_jar_md5,
+        plugin_jar_origin,
+        plugin_jar_url,
+        plugin_def_file,
+        plugin_def_file_content,
+        disable_mark,
+        remark_msg,
+        file_size,
+        upload_time,
+        create_user,
+        update_time
+        )
+        VALUES
+        <foreach collection="newPluginJars" item="pluginJar" separator=",">
+            (
+            #{pluginJar.pluginJarId},
+            #{pluginJar.pluginJarName},
+            #{pluginJar.pluginJarAlias},
+            #{pluginJar.pluginJarMd5},
+            #{pluginJar.pluginJarOrigin},
+            #{pluginJar.pluginJarUrl},
+            #{pluginJar.pluginDefFile},
+            #{pluginJar.pluginDefFileContent},
+            #{pluginJar.disableMark},
+            #{pluginJar.remarkMsg},
+            #{pluginJar.fileSize},
+            #{pluginJar.uploadTime},
+            #{pluginJar.createUser},
+            #{pluginJar.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectJarMapByJarIds" parameterType="string" resultMap="pluginJarResultMap">
+        select *
+        from dsp_plugin_jar
+        <where>
+            plugin_jar_id in
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <foreach collection="pluginJarIds" item="pluginJarId" separator=",">
+                    #{pluginJarId}
+                </foreach>
+            </trim>
+        </where>
+    </select>
+
+    <select id="selectEnableJarMap" resultType="java.util.Map">
+        select plugin_jar_id, disable_mark
+        from dsp_plugin_jar
+        where disable_mark = 0
+    </select>
+
+    <select id="selectPluginJarNameMap" resultMap="pluginJarResultMap">
+        select *
+        from dsp_plugin_jar
+    </select>
+</mapper>

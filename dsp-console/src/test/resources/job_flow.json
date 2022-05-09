@@ -1,0 +1,152 @@
+{
+  "nodes": {
+    "4580f92b-9a20-4e2d-83a5-5156092312ce": {
+      "nodeName": "4580f92b-9a20-4e2d-83a5-5156092312ce",
+      "nodeType": "Reader",
+      "nodeId": "4580f92b-9a20-4e2d-83a5-5156092312ce",
+      "plugins": [],
+      "nodeInfo": {
+        "posX": 246,
+        "posY": 111
+      },
+      "nodeDependents": [],
+      "nodeOutputDependents": [
+        "921e70fe-5d0a-40d2-8656-ece9d77139cc"
+      ],
+      "nodeDescription": "",
+      "speedLimit": {
+        "enableLimiter": false,
+        "readSpeed": 999999,
+        "processSpeed": 999999,
+        "writeSpeed": 999999,
+        "samplingInterval": 30000
+      }
+    },
+    "921e70fe-5d0a-40d2-8656-ece9d77139cc": {
+      "nodeName": "921e70fe-5d0a-40d2-8656-ece9d77139cc",
+      "nodeType": "Split",
+      "nodeId": "921e70fe-5d0a-40d2-8656-ece9d77139cc",
+      "plugins": [
+        {
+          "id": 267,
+          "pluginJarId": "ce1da1ad29445ce08ed20c9c79c2118d",
+          "pluginId": null,
+          "pluginName": "CopyStreamSpliterPlugin",
+          "pluginType": {
+            "type": "拆分插件",
+            "code": 4
+          },
+          "pluginAlias": null,
+          "pluginClass": "com.weiwan.dsp.plugins.split.CopyStreamSpliterPlugin",
+          "flowPluginRefs": [],
+          "pluginDescription": null,
+          "pluginConfigs": {},
+          "pluginInfos": null,
+          "createTime": 1648615628000,
+          "updateTime": 1648615629000
+        },
+        {
+          "id": 268,
+          "pluginJarId": "ce1da1ad29445ce08ed20c9c79c2118d",
+          "pluginId": null,
+          "pluginName": "FieldMatchSpliterPlugin",
+          "pluginType": {
+            "type": "拆分插件",
+            "code": 4
+          },
+          "pluginAlias": null,
+          "pluginClass": "com.weiwan.dsp.plugins.split.FieldMatchSpliterPlugin",
+          "flowPluginRefs": [],
+          "pluginDescription": null,
+          "pluginConfigs": {},
+          "pluginInfos": null,
+          "createTime": 1648615628000,
+          "updateTime": 1648615629000
+        },
+        {
+          "id": 269,
+          "pluginJarId": "ce1da1ad29445ce08ed20c9c79c2118d",
+          "pluginId": null,
+          "pluginName": "JavaScriptSpliterPlugin",
+          "pluginType": {
+            "type": "拆分插件",
+            "code": 4
+          },
+          "pluginAlias": null,
+          "pluginClass": "com.weiwan.dsp.plugins.split.JavaScriptSpliterPlugin",
+          "flowPluginRefs": [],
+          "pluginDescription": null,
+          "pluginConfigs": {},
+          "pluginInfos": null,
+          "createTime": 1648615628000,
+          "updateTime": 1648615629000
+        }
+      ],
+      "nodeInfo": {
+        "posX": 801,
+        "posY": 117
+      },
+      "nodeDependents": [
+        "4580f92b-9a20-4e2d-83a5-5156092312ce"
+      ],
+      "nodeOutputDependents": [
+        "1.299b90da-8fca-4408-8043-2c171413e584.1",
+        "2.003aaa19-0554-4f51-a563-1cd5cea6e5a6.1",
+        "3.003aaa19-0554-4f51-a563-1cd5cea6e5a6.1"
+      ],
+      "nodeDescription": "",
+      "speedLimit": {
+        "enableLimiter": false,
+        "readSpeed": 999999,
+        "processSpeed": 999999,
+        "writeSpeed": 999999,
+        "samplingInterval": 30000
+      }
+    },
+    "003aaa19-0554-4f51-a563-1cd5cea6e5a6": {
+      "nodeName": "003aaa19-0554-4f51-a563-1cd5cea6e5a6",
+      "nodeType": "Union",
+      "nodeId": "003aaa19-0554-4f51-a563-1cd5cea6e5a6",
+      "plugins": [],
+      "nodeInfo": {
+        "posX": 1345,
+        "posY": 224
+      },
+      "nodeDependents": [
+        "921e70fe-5d0a-40d2-8656-ece9d77139cc.2",
+        "921e70fe-5d0a-40d2-8656-ece9d77139cc.3"
+      ],
+      "nodeOutputDependents": [],
+      "nodeDescription": "",
+      "speedLimit": {
+        "enableLimiter": false,
+        "readSpeed": 999999,
+        "processSpeed": 999999,
+        "writeSpeed": 999999,
+        "samplingInterval": 30000
+      }
+    },
+    "299b90da-8fca-4408-8043-2c171413e584": {
+      "nodeName": "299b90da-8fca-4408-8043-2c171413e584",
+      "nodeType": "Process",
+      "nodeId": "299b90da-8fca-4408-8043-2c171413e584",
+      "plugins": [],
+      "nodeInfo": {
+        "posX": 1276,
+        "posY": 32
+      },
+      "nodeDependents": [
+        "921e70fe-5d0a-40d2-8656-ece9d77139cc.1"
+      ],
+      "nodeOutputDependents": [],
+      "nodeDescription": "",
+      "speedLimit": {
+        "enableLimiter": false,
+        "readSpeed": 999999,
+        "processSpeed": 999999,
+        "writeSpeed": 999999,
+        "samplingInterval": 30000
+      }
+    }
+  }
+}

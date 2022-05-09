@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Flink-DSP</artifactId>
+        <groupId>com.weiwan.dsp</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <name>Flink-Dsp : Docs</name>
+    <artifactId>dsp-docs</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <yarn.build.skip>false</yarn.build.skip>
+        <yarn.install.skip>false</yarn.install.skip>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <!-- NB! Set <version> to the latest released version of frontend-maven-plugin, like in README.md -->
+                <version>1.11.3</version>
+
+                <configuration>
+                    <installDirectory>${basedir}</installDirectory>
+                    <nodeVersion>v14.16.1</nodeVersion>
+                    <yarnVersion>v1.22.4</yarnVersion>
+<!--                    <nodeDownloadRoot>https://registry.npmmirror.com/dist/</nodeDownloadRoot>-->
+<!--                    <npmDownloadRoot>http://registry.npmjs.org/npm/-/</npmDownloadRoot>-->
+<!--                    <yarnDownloadRoot>https://registry.npmmirror.com/mirrors/yarn/</yarnDownloadRoot>-->
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>install node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <phase>generate-resources</phase>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>install</arguments>
+                        </configuration>
+                        <phase>compile</phase>
+                    </execution>
+                    <execution>
+                        <id>yarn build</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>docs:build</arguments>
+                        </configuration>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>${basedir}/docs/.vuepress/dist</directory>
+                <targetPath>META-INF/resources/webjars/docs</targetPath>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiwan.dsp.console.mapper.PluginMapper">
+    <insert id="insertBatch" parameterType="com.weiwan.dsp.console.model.entity.Plugin" useGeneratedKeys="true">
+        INSERT INTO dsp_plugin
+        (
+        plugin_id,
+        plugin_jar_id,
+        plugin_name,
+        plugin_type,
+        plugin_alias,
+        plugin_class,
+        plugin_description,
+        plugin_configs,
+        plugin_infos,
+        update_time
+        )
+        VALUES
+        <foreach collection="plugins" item="plugin" separator=",">
+            (
+            #{plugin.pluginId},
+            #{plugin.pluginJarId},
+            #{plugin.pluginName},
+            #{plugin.pluginType},
+            #{plugin.pluginAlias},
+            #{plugin.pluginClass},
+            #{plugin.pluginDescription},
+            #{plugin.pluginConfigs},
+            #{plugin.pluginInfos},
+            #{plugin.updateTime}
+            )
+        </foreach>
+    </insert>
+
+    <update id="updateBatchByClass" parameterType="com.weiwan.dsp.console.model.entity.Plugin">
+        <foreach item="plugin" collection="plugins" separator=";">
+            UPDATE dsp_plugin
+            <set>
+                <if test="plugin != null">
+                    <if test="plugin.pluginJarId != null">
+                        plugin_jar_id = #{plugin.pluginJarId},
+                    </if>
+                    <if test="plugin.pluginId != null">
+                        plugin_id = #{plugin.pluginId},
+                    </if>
+                    <if test="plugin.pluginName != null">
+                        plugin_name = #{plugin.pluginName},
+                    </if>
+                    <choose>
+                        <when test="plugin.pluginType != null">
+                            plugin_type = #{plugin.pluginType},
+                        </when>
+                        <otherwise>
+                            plugin_type = 7,
+                        </otherwise>
+                    </choose>
+                    <choose>
+                        <when test="plugin.pluginAlias != null">
+                            plugin_alias = #{plugin.pluginAlias},
+                        </when>
+                        <otherwise>
+                            plugin_alias = '',
+                        </otherwise>
+                    </choose>
+                    <choose>
+                        <when test="plugin.pluginDescription != null">
+                            plugin_description = #{plugin.pluginDescription},
+                        </when>
+                        <otherwise>
+                            plugin_description = '',
+                        </otherwise>
+                    </choose>
+                    <choose>
+                        <when test="plugin.pluginConfigs != null">
+                            plugin_configs = #{plugin.pluginConfigs},
+                        </when>
+                        <otherwise>
+                            plugin_configs = '',
+                        </otherwise>
+                    </choose>
+                    <choose>
+                        <when test="plugin.pluginInfos != null">
+                            plugin_infos = #{plugin.pluginInfos},
+                        </when>
+                        <otherwise>
+                            plugin_infos = '',
+                        </otherwise>
+                    </choose>
+                    <if test="plugin.createTime != null">
+                        create_time = #{plugin.createTime},
+                    </if>
+                    <if test="plugin.updateTime != null">
+                        update_time = #{plugin.updateTime},
+                    </if>
+                </if>
+            </set>
+            WHERE plugin_class = #{plugin.pluginClass}
+        </foreach>
+    </update>
+    <delete id="deleteBatchByClass" parameterType="string">
+        delete from dsp_plugin
+        <where>
+            plugin_class in
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <foreach collection="deleteClasses" item="deleteClass" separator=",">
+                    #{deleteClass}
+                </foreach>
+            </trim>
+        </where>
+    </delete>
+
+    <resultMap id="pluginResultMap" type="com.weiwan.dsp.console.model.entity.Plugin">
+        <result column="id" property="id"/>
+        <result column="plugin_jar_id" property="pluginJarId"/>
+        <result column="plugin_id" property="pluginId"/>
+        <result column="plugin_name" property="pluginName"/>
+        <result column="plugin_type" property="pluginType"/>
+        <result column="plugin_alias" property="pluginAlias"/>
+        <result column="plugin_class" property="pluginClass"/>
+        <result column="plugin_description" property="pluginDescription"/>
+        <result column="plugin_configs" property="pluginConfigs"/>
+        <result column="plugin_infos" property="pluginInfos"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <resultMap id="pluginClassMap" type="com.weiwan.dsp.console.model.entity.Plugin">
+        <result column="plugin_jar_id" property="pluginJarId"/>
+        <result column="plugin_class" property="pluginClass"/>
+    </resultMap>
+
+    <select id="selectMapByIds" parameterType="string" resultMap="pluginResultMap">
+        select *
+        from dsp_plugin
+        <where>
+            plugin_id in
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <foreach collection="pluginIds" item="pluginId" separator=",">
+                    #{pluginId}
+                </foreach>
+            </trim>
+        </where>
+    </select>
+
+    <select id="selectMapByJarId" parameterType="string" resultMap="pluginResultMap">
+        select *
+        from dsp_plugin
+        where plugin_jar_id = #{pluginJarId}
+    </select>
+
+    <select id="selectPluginClassMap" resultMap="pluginResultMap">
+        select *
+        from dsp_plugin
+    </select>
+</mapper>

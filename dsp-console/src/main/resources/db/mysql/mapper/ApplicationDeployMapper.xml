@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.weiwan.dsp.console.mapper.ApplicationDeployMapper">
+
+    <resultMap id="applicationDeployResultMap" type="com.weiwan.dsp.console.model.entity.ApplicationDeploy">
+        <result column="id" property="id"/>
+        <result column="app_id" property="appId"/>
+        <result column="job_id" property="jobId"/>
+        <result column="job_name" property="jobName"/>
+        <result column="job_state" property="jobState"/>
+        <result column="web_url" property="webUrl"/>
+        <result column="engine_type" property="engineType"/>
+        <result column="engine_mode" property="engineMode"/>
+        <result column="job_json" property="jobJson"/>
+        <result column="job_file_md5" property="jobFileMd5"/>
+        <result column="job_file" property="jobFile"/>
+        <result column="restart_mark" property="restartMark"/>
+        <result column="start_time" property="startTime"/>
+        <result column="end_time" property="endTime"/>
+        <result column="restart_time" property="restartTime"/>
+        <result column="user_id" property="userId"/>
+    </resultMap>
+
+    <select id="selectDeployMapByAppIds" parameterType="integer" resultMap="applicationDeployResultMap">
+        select *
+        from dsp_application_deploy
+        <where>
+            app_id in
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <foreach collection="appIds" item="appId" separator=",">
+                    #{appId}
+                </foreach>
+            </trim>
+        </where>
+    </select>
+</mapper>

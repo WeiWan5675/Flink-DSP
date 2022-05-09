@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>Flink-DSP</artifactId>
+        <groupId>com.weiwan.dsp</groupId>
+        <version>1.0.0</version>
+    </parent>
+    <packaging>pom</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>dsp-extends</artifactId>
+    <name>Flink-Dsp : Extends</name>
+    <modules>
+        <module>dsp-flink-metrics</module>
+        <module>dsp-task-schedule</module>
+        <module>dsp-plugin-example</module>
+        <module>dsp-plugin-commons</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <dsp.plugin.version>1.0.0</dsp.plugin.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.weiwan.dsp</groupId>
+            <artifactId>dsp-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.weiwan.dsp</groupId>
+            <artifactId>dsp-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.weiwan.dsp</groupId>
+            <artifactId>dsp-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.weiwan.dsp</groupId>
+                <artifactId>dsp-plugin-example</artifactId>
+                <version>${dsp.plugin.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.weiwan.dsp</groupId>
+                <artifactId>Dsp-Plugins</artifactId>
+                <version>${dsp.plugin.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+</project>
