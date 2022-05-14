@@ -181,7 +181,7 @@ You could help Flink-DSP development in many ways。
 
 * If you're a software developer and want to get involved. [online documents](http://127.0.0.1/dsp/docs)。
 
-* Contact with me and join our wechat group. Here is my QR code.
+* Contact with me and join our wechat group. Here is my QR code. 🎈
 
    <img src="dsp-docs\docs\.resources\wx.jpg" alt="LOGO" width = "256" height = "256"/>
 
