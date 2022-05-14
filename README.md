@@ -30,7 +30,7 @@
 
 ## 🌌Introduction
 
-&ensp;Flink-DSP can help you process business data streams by the action of drag-and-drop. By developing reusable plugins and applying custom plugins in your process, the cost of data service development can be greatly reduced.
+&ensp;Flink-DSP can help you process business data streams by drag-and-drop action. By developing reusable plugins and applying them in your process, the cost of data service development can be greatly reduced.
 
 &ensp;Relying on the powerful features provided by Flink, such as massively parallel processing and high availability, business applications processed through Flink-DSP contain these features natively.
 
@@ -100,7 +100,7 @@
 
 - install
 
-  To use the command below to uncompress the artifact package to the install directory.
+  Use the command below to uncompress the artifact package to the install directory.
 
   ```shell
   tar -zxvf Flink-DSP-${version}.tar.gz
@@ -135,7 +135,7 @@
 
 - View
 
-  To use browser to open the url below, and use default username and password `admin/123456` to login.
+  Use browser to open the url below, and use default username and password `admin/123456` to login.
 
   ```shell
   http://127.0.0.1:9876/
