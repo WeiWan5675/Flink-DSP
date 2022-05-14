@@ -23,10 +23,10 @@ public enum DspResultStatus implements ResultStatus {
     APPLICATION_ENGINE_CONFIG_NOT_EXIST(2005, "应用引擎配置不存在"),
     APPLICATION_APP_CONFIG_NOT_EXIST(2006, "核心应用配置不存在"),
     APPLICATION_NAME_EXIST(2007, "应用名称相同, 已经存在相同的应用了"),
-    APPLICATION_DEPLOY_RUNING(2008, "应用正在运行, 需要先停止应用部署"),
+    APPLICATION_DEPLOY_RUNNING(2008, "应用正在运行, 需要先停止应用部署"),
     APPLICATION_DEPLOY_DELETE_ERROR(2009, "删除应用部署失败, 请检查当前应用状态"),
-    APPLICATION_APP_DEPLOY_EXISIT(2010, "无法创建应用部署, 当前应用部署已经存在"),
-    FLOW_DISABLE(2011, "关联的流程处于被禁用状态"),
+    APPLICATION_APP_DEPLOY_EXISTS(2010, "无法创建应用部署, 当前应用部署已经存在"),
+    FLOW_DISABLED(2011, "关联的流程处于被禁用状态"),
     FAILED_ADD_FLOW_REF(2012, "无法添加流程关联,已经存在了"),
     UPDATE_DEPLOY_CONFIG_FAIL(2023, "更新作业部署配置失败"),
     APPLICATION_DEPLOY_CREATE_ERROR(2024, "应用部署创建失败, 请检查日志"),
@@ -35,7 +35,7 @@ public enum DspResultStatus implements ResultStatus {
     PLUGIN_CLASS_IS_NULL(2027, "插件属性错误, ClassName不能为空"),
     PLUGIN_IS_NOT_FOUNT(2028, "无法找到插件, 请检查插件是否存在"),
     PLUGIN_IS_DISABLE(2029, "插件被禁用, 无法使用"),
-    PLUGIN_ISNOT_LOAD(2030, "插件没有被加载, 请检查插件状态"),
+    PLUGIN_NOT_LOAD(2030, "插件没有被加载, 请检查插件状态"),
     PLUGIN_IS_REQUIRED(2031, "必须添加至少一个插件"),
     FLOW_EXIST_NAME(2032, "流程名称已经存在"),
     FLOW_IS_NOT_EXIST(2033, "流程不存在"),
@@ -74,7 +74,7 @@ public enum DspResultStatus implements ResultStatus {
     FLOW_DOWNLOAD_FAILED(2066, "流下载失败, 请重试"),
     APPLICATION_DELETE_FAILED(2067, "应用删除失败, 请重试"),
     FLOW_EXISTS(2068, "流已存在"),
-    APPLICATION_DEPLOY_NOT_RUNING(2069, "作业不在运行状态"),
+    APPLICATION_DEPLOY_NOT_RUNNING(2069, "作业不在运行状态"),
     APPLICATION_NOT_EXIST(2070, "应用不存在");
 
     private int code;

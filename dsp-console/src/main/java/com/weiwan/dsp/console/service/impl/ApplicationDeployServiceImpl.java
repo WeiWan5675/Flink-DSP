@@ -7,7 +7,6 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.weiwan.dsp.api.config.core.*;
 import com.weiwan.dsp.api.config.flow.FlowConfig;
-import com.weiwan.dsp.api.config.flow.NodeConfig;
 import com.weiwan.dsp.api.constants.CoreConstants;
 import com.weiwan.dsp.api.enums.ApplicationState;
 import com.weiwan.dsp.client.deploy.DeployerFactory;
@@ -41,8 +40,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URI;
-import java.net.URL;
 import java.util.*;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
@@ -109,7 +106,7 @@ public class ApplicationDeployServiceImpl extends ServiceImpl<ApplicationDeployM
         }
         ApplicationState jobState = applicationDeploy.getJobState();
         if (!ApplicationState.isFinalState(jobState)) {
-            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_DEPLOY_RUNING);
+            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_DEPLOY_RUNNING);
         }
 
         DspContextConfig dspContext = applicationDeploy.getDspContext();
@@ -136,7 +133,7 @@ public class ApplicationDeployServiceImpl extends ServiceImpl<ApplicationDeployM
         }
         ApplicationState jobState = applicationDeploy.getJobState();
         if (!ApplicationState.isRunningState(jobState)) {
-            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_DEPLOY_NOT_RUNING);
+            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_DEPLOY_NOT_RUNNING);
         }
         DspContextConfig dspContext = applicationDeploy.getDspContext();
         JobDeployExecutor deployExecutor = deployExecutorMap.computeIfAbsent(applicationDeploy.getJobId(), e -> (JobDeployExecutor) DeployerFactory.createDeployer(dspContext.getDsp()));
@@ -255,7 +252,7 @@ public class ApplicationDeployServiceImpl extends ServiceImpl<ApplicationDeployM
         String jobId = applicationDTO.getJobId();
         ApplicationDeploy deploy = searchDeployByJobId(jobId);
         if (deploy != null) {
-            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_APP_DEPLOY_EXISIT);
+            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_APP_DEPLOY_EXISTS);
         }
 
         ApplicationDeployDTO deployDTO = new ApplicationDeployDTO();

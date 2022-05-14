@@ -161,7 +161,7 @@ public class FlowServiceImpl extends ServiceImpl<FlowMapper, Flow> implements Fl
             for (PluginConfig pluginConfig : plugins) {
                 boolean loaded = pluginService.checkIsLoaded(pluginConfig);
                 if (!loaded) {
-                    throw DspConsoleException.generateIllegalStateException(DspResultStatus.PLUGIN_ISNOT_LOAD);
+                    throw DspConsoleException.generateIllegalStateException(DspResultStatus.PLUGIN_NOT_LOAD);
                 }
                 pluginIds.add(pluginConfig.getPluginId());
             }

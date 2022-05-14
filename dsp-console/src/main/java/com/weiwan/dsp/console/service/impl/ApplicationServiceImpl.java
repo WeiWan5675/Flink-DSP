@@ -25,7 +25,6 @@ import com.weiwan.dsp.console.model.query.PageQuery;
 import com.weiwan.dsp.console.model.vo.*;
 import com.weiwan.dsp.console.service.*;
 import com.weiwan.dsp.core.pub.JobID;
-import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,7 +94,7 @@ public class ApplicationServiceImpl extends ServiceImpl<ApplicationMapper, Appli
 
         if (flowDTO.getDisableMark() == 1) {
             //流程处于被禁用状态
-            throw new DspConsoleException(DspResultStatus.FLOW_DISABLE, "关联的流程处于被禁用状态");
+            throw new DspConsoleException(DspResultStatus.FLOW_DISABLED, "关联的流程处于被禁用状态");
         }
 
 
@@ -164,7 +163,7 @@ public class ApplicationServiceImpl extends ServiceImpl<ApplicationMapper, Appli
         //1. 如果是运行状态,需要先停止运行然后删除
         Integer appState = application.getAppState();
         if (!ApplicationState.isFinalState(ApplicationState.getApplicationState(appState))) {
-            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_DEPLOY_RUNING);
+            throw DspConsoleException.generateIllegalStateException(DspResultStatus.APPLICATION_DEPLOY_RUNNING);
         }
         //2. 删除应用
         applicationMapper.deleteById(appId);
@@ -202,7 +201,7 @@ public class ApplicationServiceImpl extends ServiceImpl<ApplicationMapper, Appli
             // 查询流程
             FlowVo flowVO = flowService.findFlowById(dto.getFlowId());
             if (flowVO == null || flowVO.getDisableMark() == 1) {
-                throw DspConsoleException.generateIllegalStateException(DspResultStatus.FLOW_DISABLE);
+                throw DspConsoleException.generateIllegalStateException(DspResultStatus.FLOW_DISABLED);
             }
             FlowDTO flowDTO = FlowDTO.fromFlowVo(flowVO);
             dto.setFlowDTO(flowDTO);
