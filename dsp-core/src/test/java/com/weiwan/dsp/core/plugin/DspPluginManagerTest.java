@@ -33,7 +33,7 @@ public class DspPluginManagerTest extends TestCase {
     @Test
     public void testPluginManager(){
         DspPluginManager dspPluginManager = DspPluginManager.getInstance();
-        PluginRepoV2 pluginRepo = dspPluginManager.getPluginRepo();
+        PluginRepo pluginRepo = dspPluginManager.getPluginRepo();
 
     }
 

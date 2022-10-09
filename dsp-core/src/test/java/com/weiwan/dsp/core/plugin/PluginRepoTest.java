@@ -22,7 +22,7 @@ public class PluginRepoTest extends TestCase {
         File[] files = file.listFiles();
 
         pluginManager.registerPlugins(files);
-        PluginRepoV2 pluginRepo = pluginManager.getPluginRepo();
+        PluginRepo pluginRepo = pluginManager.getPluginRepo();
         PluginMetaData search = pluginRepo.search("com.weiwan.dsp.plugins.input.ExampleInputPlugin");
 //        boolean disable = pluginRepo.disable(search.getPluginClass());
 //        boolean block = pluginRepo.block(search.getPluginClass());

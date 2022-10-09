@@ -27,7 +27,7 @@ public class PluginFactory {
     private static PluginFactory instance;
     private volatile boolean inited;
     private DspPluginManager pluginManager;
-    private PluginRepoV2 pluginRepo;
+    private PluginRepo pluginRepo;
     private PluginClassLoader pluginClassLoader;
 
     private PluginFactory() {

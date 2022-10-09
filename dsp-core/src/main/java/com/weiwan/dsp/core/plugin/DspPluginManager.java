@@ -49,14 +49,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class DspPluginManager {
     private static final Logger logger = LoggerFactory.getLogger(DspPluginManager.class);
-    private PluginRepoV2 pluginRepo;
+    private PluginRepo pluginRepo;
     private ClassLoader contextClassLoader;
     private Map<String, PluginClassLoader> classLoaderMap = new ConcurrentHashMap<>();
     private String baseDir;
     private static DspPluginManager pluginManager;
 
     private DspPluginManager() {
-        this.pluginRepo = new PluginRepoV2();
+        this.pluginRepo = new PluginRepo();
         this.contextClassLoader = Thread.currentThread().getContextClassLoader();
     }
 
@@ -269,11 +269,11 @@ public class DspPluginManager {
         return urlList;
     }
 
-    public PluginRepoV2 getPluginRepo() {
+    public PluginRepo getPluginRepo() {
         return pluginRepo;
     }
 
-    public void setPluginRepo(PluginRepoV2 pluginRepo) {
+    public void setPluginRepo(PluginRepo pluginRepo) {
         this.pluginRepo = pluginRepo;
     }
 
