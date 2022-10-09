@@ -2,7 +2,7 @@ dsp:
   datasource:
     dbType: mysql
     dbName: flink_dsp
-    showSql: true
+    showSql: false
     formatSql: true
 
     mysql:
@@ -42,7 +42,7 @@ dsp:
         url-pattern: /admin/druid/*
       filter:
         stat:
-          enabled: true
+          enabled: false
           #慢SQL记录
           log-slow-sql: true
           slow-sql-millis: 1000
